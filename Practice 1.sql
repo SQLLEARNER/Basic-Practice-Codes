@@ -37,6 +37,28 @@ WHERE yearhired >= 2003;
 /* Result : Msg 207, Level 16, State 1, Line 3
 Invalid column name 'yearhired'.*/
 /*Difference Between having and where clause  */
-The WHERE clause is evaluated before rows are grouped, and therefore is evaluated
+/*The WHERE clause is evaluated before rows are grouped, and therefore is evaluated
 per row. The HAVING clause is evaluated after rows are grouped, and therefore
-is evaluated per group.
+is evaluated per group.*/
+/*ORDER BY clause is the first and only clause that is allowed to refer to column
+aliases defined in the SELECT clause. That’s because the ORDER BY clause is the only one
+to be evaluated after the SELECT clause.*/
+SELECT CUSTID, MAX(ORDERID)
+FROM  SALES.ORDERS
+GROUP BY CUSTID
+/*QUESTION 2 */
+SELECT SHIPPERID
+,SUM(FREIGHT) AS TOTALFRIEGHT
+FROM SALES.ORDERS
+GROUP BY SHIPPERID  
+HAVING SUM(FREIGHT) >2000.00
+/*It is important to use standard SQL code. This way, both the code and people’s knowledge
+is more portable. Especially in cases where there are both standard and nonstandard
+forms for a language element, it’s recommended to use the standard form.*/
+/*Adding unneccesary distinct incurs a additional cost  */
+SELECT empid, country, YEAR(hiredate) AS yearhired, yearhired - 1 AS prevyear
+FROM HR.Employees;
+/*T-SQL evaluates all expressions that
+appear in the same logical query processing phase in an all-at-once manner. Note the use of
+the word conceptually. SQL Server won’t necessarily physically process all expressions at the
+same point in time, but it has to produce a result as if it did.*/  
