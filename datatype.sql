@@ -11,3 +11,43 @@ NULL input with an empty string. Here’s how the query looks*/
 SELECT empid, country, region, city,
 CONCAT(country, N',' + region, N',' + city) AS location
 FROM HR.Employees;
+/*adding the number of bits in the right of the columns values  */
+Select productId
+Right(Replicate('0',10)+cast(productid as varchar(10),10),10) as str_producid
+From Production.product
+/*Use char when the sizes of the column data entries are consistent.
+Use varchar when the sizes of the column data entries vary considerably.
+Use varchar(max) when the sizes of the column data entries vary considerably, and the size might exceed 8,000 bytes.*/
+/*SQL Server uses the following precedence order for data types:
+user-defined data types (highest)
+sql_varian t
+xml
+datetimeoffset
+datetime2
+datetime
+smalldatetime
+date
+time
+float
+real
+decimal
+money
+smallmoney
+bigint
+int
+smallint
+tinyint
+bit
+ntext
+text
+image
+timestamp
+uniqueidentifier
+nvarchar (including nvarchar(max) )
+nchar
+varchar (including varchar(max) )
+char
+varbinary (including varbinary(max) )
+binary (lowest) */
+/*QL Server 2012 obtains the date and time values by using the GetSystemTimeAsFileTime() Windows API*/
+/*The accuracy can be determined by using the GetSystemTimeAdjustment() Windows API.*/
