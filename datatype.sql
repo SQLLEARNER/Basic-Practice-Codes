@@ -51,3 +51,12 @@ varbinary (including varbinary(max) )
 binary (lowest) */
 /*QL Server 2012 obtains the date and time values by using the GetSystemTimeAsFileTime() Windows API*/
 /*The accuracy can be determined by using the GetSystemTimeAdjustment() Windows API.*/
+Select ProductCatalog.CatID, ProductCatalog.CatName, ProductCatalog.ProductID, ProductCatalog.ProdName, ProductCatalog.UnitPrice
+Rank() over(Partition BY ProductCatalog.UnitPrice order by ProductCatalog.UnitPrice Desc )
+From Sales.ProductCatalog
+order by ProductCatalog.UnitPrice Desc
+Create Table DocumentStore
+(
+[id] int not null primary key
+[Document] varbinary(Max)Null
+)
